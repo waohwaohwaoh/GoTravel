@@ -1,2 +1,2 @@
 export { default as SplashScreen } from './SplashScreen';
-export { default as HomeScreen } from './HomeTab/HomeScreen';
+export { default as TipScreen } from './Tips/TipScreen';

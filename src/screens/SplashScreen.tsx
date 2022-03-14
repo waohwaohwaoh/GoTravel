@@ -1,9 +1,12 @@
 import { R } from '../utils/R';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { AnimationMarker } from '../components';
 import { Text } from 'react-native-paper';
 import Animated, { useValue, EasingNode } from 'react-native-reanimated';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AppStackRoutes } from '../navigation/config';
 
 const styles = StyleSheet.create({
   container: {
@@ -20,6 +23,9 @@ const defaultMarkerScaleW = 0.35;
 const defaultMarkerScaleH = 0.25;
 
 const SplashScreen = () => {
+  const navigation =
+    useNavigation<NavigationProp<AppStackRoutes, 'SplashScreen'>>();
+
   const textOpacity = useValue(0);
   const focusAnim = useRef(new Animated.Value(0)).current;
   // left animation
@@ -71,9 +77,23 @@ const SplashScreen = () => {
         toValue: 1,
         duration: 700,
         easing: EasingNode.ease,
-      }).start();
+      }).start(async () => {
+        try {
+          const showTip = await AsyncStorage.getItem('ShowTip');
+          if (showTip === null) {
+            await AsyncStorage.setItem('ShowTip', 'true');
+          }
+          setTimeout(
+            () =>
+              navigation.navigate(showTip != null ? 'HomeScreen' : 'TipScreen'),
+            1500,
+          );
+        } catch (e) {
+          // error reading value
+        }
+      });
     });
-  }, [leftRotate, leftTranslateX, leftTranslateY, focusAnim]);
+  }, [leftRotate, leftTranslateX, leftTranslateY, focusAnim, navigation]);
 
   const startAnimation = useCallback(() => {
     // Выдвижение при старте
@@ -133,8 +153,6 @@ const SplashScreen = () => {
   useEffect(() => {
     startAnimation();
   }, [startAnimation]);
-
-  console.log(rightScale);
 
   return (
     <View style={styles.container}>
