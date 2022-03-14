@@ -23,6 +23,11 @@ module.exports = {
   plugins: ['react', '@typescript-eslint', 'prettier'],
   settings: {
     'import/ignore': ['react-native'],
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    },
   },
   overrides: [
     {
