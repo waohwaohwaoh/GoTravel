@@ -3,9 +3,9 @@ export const R = {
     primary: '#4D92FB',
     secondary: '#FFDF00',
     default: '#0000',
+    black: '#242424',
     white: '#FFFFFF',
     red_light: '#F44336',
-    black: '#242424',
   },
   string: {
     tab: {

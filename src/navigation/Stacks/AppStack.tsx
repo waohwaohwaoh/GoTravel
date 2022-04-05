@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { TipScreen, SplashScreen } from '../../screens';
+import { TipScreen, SplashScreen } from '~/screens';
 import TabStack from './TabBar';
 
 const Stack = createNativeStackNavigator();

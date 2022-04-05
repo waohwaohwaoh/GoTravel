@@ -47,6 +47,7 @@ static void InitializeFlipper(UIApplication *application) {
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  [YMKMapKit setApiKey: @"318244ea-6b34-424d-8e7a-bbbdc240bde9"];
   return YES;
 }
 
