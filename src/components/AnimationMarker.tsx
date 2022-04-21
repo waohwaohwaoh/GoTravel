@@ -1,8 +1,8 @@
-import { R } from '../utils/R';
+import { R } from '~/utils/R';
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { MarkerSvg } from '.';
+import Marker from './Svg/Marker';
 
 interface AnimationMarkerProps {
   color: keyof typeof R.colors;
@@ -36,7 +36,7 @@ const AnimationMarker = ({
           },
           styles.absoluteContainer,
         ]}>
-        <MarkerSvg color={color} />
+        <Marker color={color} />
       </Animated.View>
       <Animated.View
         style={[
@@ -49,7 +49,7 @@ const AnimationMarker = ({
           },
           styles.absoluteContainer,
         ]}>
-        <MarkerSvg color={additionalColor} />
+        <Marker color={additionalColor} />
       </Animated.View>
     </View>
   );

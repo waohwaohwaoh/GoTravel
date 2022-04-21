@@ -1,12 +1,12 @@
-import { R } from '../utils/R';
+import { R } from '~/utils/R';
 import React, { useCallback, useEffect, useRef } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
-import { AnimationMarker } from '../components';
+import AnimationMarker from '~/components/AnimationMarker';
 import { Text } from 'react-native-paper';
 import Animated, { useValue, EasingNode } from 'react-native-reanimated';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AppStackRoutes } from '../navigation/config';
+import { AppStackRoutes } from '~/navigation/config';
 
 const styles = StyleSheet.create({
   container: {
@@ -39,43 +39,40 @@ const SplashScreen = () => {
   const rightScale = useValue(0.2);
   const rightRotate = useValue(0);
 
-  const rotateRightAnimation = useCallback(() => {
-    Animated.timing(rightRotate, {
-      toValue: 110,
-      duration: 50,
-      easing: EasingNode.ease,
+  const rotateLeftAnimation = useCallback(() => {
+    Animated.timing(leftTranslateX, {
+      toValue: 20,
+      duration: 300,
+      easing: EasingNode.inOut(EasingNode.ease),
     }).start();
     Animated.timing(rightTranslateX, {
       toValue: -20,
-      duration: 200,
+      duration: 300,
+      easing: EasingNode.inOut(EasingNode.ease),
+    }).start();
+    Animated.timing(leftRotate, {
+      toValue: 0,
+      duration: 50,
+      easing: EasingNode.linear,
+    }).start();
+    Animated.timing(rightRotate, {
+      toValue: -110,
+      duration: 50,
       easing: EasingNode.linear,
     }).start();
     Animated.timing(rightTranslateY, {
       toValue: -(defaultMarkerScaleH * height) + 10,
-      duration: 200,
-      easing: EasingNode.linear,
-    }).start();
-  }, [rightRotate, rightTranslateX, rightTranslateY]);
-
-  const rotateLeftAnimation = useCallback(() => {
-    Animated.timing(leftRotate, {
-      toValue: 0,
-      duration: 50,
-      easing: EasingNode.ease,
-    }).start();
-    Animated.timing(leftTranslateX, {
-      toValue: 20,
-      duration: 200,
-      easing: EasingNode.linear,
+      duration: 300,
+      easing: EasingNode.inOut(EasingNode.ease),
     }).start();
     Animated.timing(leftTranslateY, {
       toValue: defaultMarkerScaleH * height - 10,
-      duration: 200,
-      easing: EasingNode.linear,
+      duration: 300,
+      easing: EasingNode.inOut(EasingNode.ease),
     }).start(() => {
       Animated.timing(focusAnim, {
         toValue: 1,
-        duration: 700,
+        duration: 500,
         easing: EasingNode.ease,
       }).start(async () => {
         try {
@@ -93,7 +90,16 @@ const SplashScreen = () => {
         }
       });
     });
-  }, [leftRotate, leftTranslateX, leftTranslateY, focusAnim, navigation]);
+  }, [
+    leftRotate,
+    leftTranslateX,
+    leftTranslateY,
+    focusAnim,
+    navigation,
+    rightRotate,
+    rightTranslateX,
+    rightTranslateY,
+  ]);
 
   const startAnimation = useCallback(() => {
     // Выдвижение при старте
@@ -135,7 +141,6 @@ const SplashScreen = () => {
       duration: 1000,
       easing: EasingNode.exp,
     }).start(() => {
-      rotateRightAnimation();
       rotateLeftAnimation();
     });
   }, [
@@ -146,7 +151,6 @@ const SplashScreen = () => {
     leftTranslateY,
     rightScale,
     leftScale,
-    rotateRightAnimation,
     rotateLeftAnimation,
   ]);
 
