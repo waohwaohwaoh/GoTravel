@@ -4,7 +4,7 @@ Android
 | Branch  | Buld Status |
 | ------------- | ------------- |
 | master  | [![Build status](https://build.appcenter.ms/v0.1/apps/a1c3bec3-b05d-4539-b1bd-072df60a147c/branches/master/badge)](https://appcenter.ms)  |
-| test  | Content  |
+| test  | [![Build status](https://build.appcenter.ms/v0.1/apps/a1c3bec3-b05d-4539-b1bd-072df60a147c/branches/test/badge)](https://appcenter.ms)  |
 | dev  | [![Build status](https://build.appcenter.ms/v0.1/apps/a1c3bec3-b05d-4539-b1bd-072df60a147c/branches/dev/badge)](https://appcenter.ms)  |
 
 IoS 
