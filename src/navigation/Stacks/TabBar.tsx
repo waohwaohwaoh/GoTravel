@@ -1,10 +1,8 @@
 import React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { R } from '../../utils/R';
+import { R } from '~/utils/R';
 import Ionicons from 'react-native-vector-icons/MaterialCommunityIcons';
-import SearchScreen from '../../screens/HomeTab/SearchScreen';
-import RoutesScreen from '../../screens/HomeTab/RoutesScreen';
-import ProfileScreen from '../../screens/HomeTab/ProfileScreen';
+import { SearchScreen, RoutesScreen, ProfileScreen } from '~/screens';
 
 const Tab = createMaterialBottomTabNavigator();
 
