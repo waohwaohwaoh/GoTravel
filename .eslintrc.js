@@ -29,6 +29,9 @@ module.exports = {
       },
     },
   },
+  rules: {
+    'import/no-unresolved': 'off',
+  },
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
